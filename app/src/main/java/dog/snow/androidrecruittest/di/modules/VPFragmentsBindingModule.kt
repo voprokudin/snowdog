@@ -2,8 +2,8 @@ package dog.snow.androidrecruittest.di.modules
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import dog.snow.androidrecruittest.ui.VPDetailsFragment
-import dog.snow.androidrecruittest.ui.VPListFragment
+import dog.snow.androidrecruittest.presentation.view.VPDetailsFragment
+import dog.snow.androidrecruittest.presentation.view.VPListFragment
 
 @Module
 abstract class VPFragmentsBindingModule {

@@ -4,8 +4,8 @@ import androidx.fragment.app.FragmentManager
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.VPActivity
 import dog.snow.androidrecruittest.common.intentfactory.VPHomeIntentFactory
-import dog.snow.androidrecruittest.ui.VPDetailsFragment
-import dog.snow.androidrecruittest.ui.VPListFragment
+import dog.snow.androidrecruittest.presentation.view.VPDetailsFragment
+import dog.snow.androidrecruittest.presentation.view.VPListFragment
 import dog.snow.androidrecruittest.util.fragment.VPFragmentUtil
 import javax.inject.Inject
 import javax.inject.Singleton

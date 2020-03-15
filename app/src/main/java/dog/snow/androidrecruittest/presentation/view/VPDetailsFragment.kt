@@ -1,4 +1,4 @@
-package dog.snow.androidrecruittest.ui
+package dog.snow.androidrecruittest.presentation.view
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,8 @@ class VPDetailsFragment : VPFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(): VPDetailsFragment = VPDetailsFragment()
+        fun newInstance(): VPDetailsFragment =
+            VPDetailsFragment()
     }
 
     override val getLayoutResId: Int = R.layout.details_fragment

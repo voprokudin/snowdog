@@ -1,4 +1,4 @@
-package dog.snow.androidrecruittest.ui
+package dog.snow.androidrecruittest.presentation.view
 
 import android.os.Bundle
 import android.os.Handler
@@ -14,8 +14,7 @@ import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
 import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel
-import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
-import dog.snow.androidrecruittest.ui.adapter.VPListAdapter
+import dog.snow.androidrecruittest.presentation.view.list.adapter.VPListAdapter
 import kotlinx.android.synthetic.main.list_fragment.*
 import java.util.ArrayList
 import javax.inject.Inject
@@ -26,7 +25,8 @@ class VPListFragment :
 
     companion object {
         @JvmStatic
-        fun newInstance(): VPListFragment = VPListFragment()
+        fun newInstance(): VPListFragment =
+            VPListFragment()
     }
 
     @Inject
@@ -50,22 +50,22 @@ class VPListFragment :
     }
 
     private fun setupViewModel() {
-        viewModel.screenState.observe(this, ScreenActionObserver())
+        viewModel.screenState.observe(viewLifecycleOwner, ScreenActionObserver())
     }
 
     private fun showData(items: ArrayList<String>) {
         emptyView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
 
-        val listAdapter = VPListAdapter(
-            items = items,
-            itemsClickedListener = this
-        )
+        val listAdapter =
+            VPListAdapter(
+                items = items,
+                itemsClickedListener = this
+            )
         rvItems.run {
             visibility = View.VISIBLE
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             adapter = listAdapter
-//            addItemDecoration(VPDividerItemDecoration(resources.getDrawable(R.drawable.vp_line_devider)))
         }
     }
 

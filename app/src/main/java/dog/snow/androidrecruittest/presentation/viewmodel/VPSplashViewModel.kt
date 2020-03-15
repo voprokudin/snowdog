@@ -3,12 +3,16 @@ package dog.snow.androidrecruittest.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dog.snow.androidrecruittest.data.model.VPRawAlbum
+import dog.snow.androidrecruittest.data.model.VPRawPhoto
+import dog.snow.androidrecruittest.data.model.VPRawUser
+import dog.snow.androidrecruittest.domain.interactor.VPGetPhotosUseCase
 import dog.snow.androidrecruittest.domain.interactor.base.VPEmptySingleObserver
 import javax.inject.Inject
 
 class VPSplashViewModel
 @Inject constructor(
-//    private val getProductsCodesUseCase: VPGetProductsCodesUseCase
+    private val getPhotosUseCase: VPGetPhotosUseCase
 ) : ViewModel() {
 
     val screenState: LiveData<ScreenState> by lazy { mutableScreenState }
@@ -16,14 +20,14 @@ class VPSplashViewModel
     private val mutableScreenState = MutableLiveData<ScreenState>()
 
     fun fetchData() {
-//        getProductsCodesUseCase.execute(observer = GetProductsCodesObserver())
-        val list = arrayListOf<String>()
-        list.add("df")
-        mutableScreenState.value = ScreenState.ShowData(list)
+        getPhotosUseCase.execute(observer = GetPhotosObserver())
+//        val list = arrayListOf<String>()
+//        list.add("df")
+//        mutableScreenState.value = ScreenState.ShowData(list)
     }
 
-    internal inner class GetProductsCodesObserver : VPEmptySingleObserver<ArrayList<String>>() {
-        override fun onSuccess(result: ArrayList<String>) {
+    internal inner class GetPhotosObserver : VPEmptySingleObserver<List<VPRawUser>>() {
+        override fun onSuccess(result: List<VPRawUser>) {
             mutableScreenState.value = ScreenState.ShowData(result)
         }
 
@@ -33,7 +37,7 @@ class VPSplashViewModel
     }
 
     sealed class ScreenState {
-        class ShowData(val productsCodes: ArrayList<String>) : ScreenState()
+        class ShowData(val photos: List<VPRawUser>) : ScreenState()
         class ShowGeneralError(val errorMessage: String?) : ScreenState()
     }
 }

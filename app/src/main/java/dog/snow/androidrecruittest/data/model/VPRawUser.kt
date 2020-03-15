@@ -1,10 +1,10 @@
-package dog.snow.androidrecruittest.repository.model
+package dog.snow.androidrecruittest.data.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class RawUser(
+data class VPRawUser(
     val id: Int,
     val name: String,
     val username: String,

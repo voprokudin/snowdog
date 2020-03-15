@@ -1,14 +1,11 @@
-package dog.snow.androidrecruittest.ui.adapter
+package dog.snow.androidrecruittest.presentation.view.list.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
-import dog.snow.androidrecruittest.ui.model.ListItem
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.util.ArrayList
 

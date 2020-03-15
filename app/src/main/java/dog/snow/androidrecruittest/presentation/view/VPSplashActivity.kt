@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.VPActivity
+import dog.snow.androidrecruittest.data.model.VPRawAlbum
+import dog.snow.androidrecruittest.data.model.VPRawPhoto
+import dog.snow.androidrecruittest.data.model.VPRawUser
 import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
@@ -30,7 +33,6 @@ class VPSplashActivity : VPActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_activity)
-
         setupViewModel()
         fetchData()
     }
@@ -73,17 +75,20 @@ class VPSplashActivity : VPActivity() {
             screenAction ?: return
 
             when (screenAction) {
-                is ShowData -> showData(screenAction.productsCodes)
+                is ShowData -> showData(screenAction.photos)
                 is ShowGeneralError -> showError(screenAction.errorMessage)
             }
         }
     }
 
-    private fun showData(productsCodes: ArrayList<String>) {
-        val r = Runnable {
-            hideProgressBar()
-            navigator.openHomeActivity()
-        }
-        Handler().postDelayed(r, 2000)
+    private fun showData(photos: List<VPRawUser>) {
+        println(photos)
+        hideProgressBar()
+//        navigator.openHomeActivity()
+//        val r = Runnable {
+//            hideProgressBar()
+//            navigator.openHomeActivity()
+//        }
+//        Handler().postDelayed(r, 2000)
     }
 }

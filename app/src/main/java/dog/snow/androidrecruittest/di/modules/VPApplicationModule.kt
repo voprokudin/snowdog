@@ -4,6 +4,9 @@ import dagger.Module
 import dagger.Provides
 import dog.snow.androidrecruittest.base.VPActivity
 import dog.snow.androidrecruittest.common.intentfactory.VPHomeIntentFactory
+import dog.snow.androidrecruittest.data.rest.VPAlbumService
+import dog.snow.androidrecruittest.data.rest.VPPhotoService
+import dog.snow.androidrecruittest.data.rest.VPUserService
 import dog.snow.androidrecruittest.presentation.factory.VPHomeIntentFactoryImpl
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.util.fragment.VPFragmentUtil
@@ -14,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module(includes = [VPViewModelModule::class])
 class VPApplicationModule {
 
-    private val BASE_URL = "https://recruitment-task.futuremind.dev/api/products/"
+    private val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
     @Provides
     internal fun provideRetrofit(): Retrofit {
@@ -24,10 +27,20 @@ class VPApplicationModule {
             .build()
     }
 
-//    @Provides
-//    internal fun provideRetrofitService(retrofit: Retrofit): VPProductsService {
-//        return retrofit.create<VPProductsService>(VPProductsService::class.java)
-//    }
+    @Provides
+    internal fun provideRetrofitPhotoService(retrofit: Retrofit): VPPhotoService {
+        return retrofit.create<VPPhotoService>(VPPhotoService::class.java)
+    }
+
+    @Provides
+    internal fun provideRetrofitAlbumService(retrofit: Retrofit): VPAlbumService {
+        return retrofit.create<VPAlbumService>(VPAlbumService::class.java)
+    }
+
+    @Provides
+    internal fun provideRetrofitUserService(retrofit: Retrofit): VPUserService {
+        return retrofit.create<VPUserService>(VPUserService::class.java)
+    }
 
     @Provides
     internal fun provideVPFragmentUtil(): VPFragmentUtil = VPFragmentUtil()
