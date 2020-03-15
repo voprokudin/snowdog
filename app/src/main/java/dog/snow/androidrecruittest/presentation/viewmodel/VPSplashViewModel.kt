@@ -3,11 +3,9 @@ package dog.snow.androidrecruittest.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dog.snow.androidrecruittest.data.model.VPRawAlbum
-import dog.snow.androidrecruittest.data.model.VPRawPhoto
-import dog.snow.androidrecruittest.data.model.VPRawUser
 import dog.snow.androidrecruittest.domain.interactor.VPGetPhotosUseCase
 import dog.snow.androidrecruittest.domain.interactor.base.VPEmptySingleObserver
+import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import javax.inject.Inject
 
 class VPSplashViewModel
@@ -26,8 +24,8 @@ class VPSplashViewModel
 //        mutableScreenState.value = ScreenState.ShowData(list)
     }
 
-    internal inner class GetPhotosObserver : VPEmptySingleObserver<List<VPRawUser>>() {
-        override fun onSuccess(result: List<VPRawUser>) {
+    internal inner class GetPhotosObserver : VPEmptySingleObserver<List<VPListItem>>() {
+        override fun onSuccess(result: List<VPListItem>) {
             mutableScreenState.value = ScreenState.ShowData(result)
         }
 
@@ -37,7 +35,7 @@ class VPSplashViewModel
     }
 
     sealed class ScreenState {
-        class ShowData(val photos: List<VPRawUser>) : ScreenState()
+        class ShowData(val photos: List<VPListItem>) : ScreenState()
         class ShowGeneralError(val errorMessage: String?) : ScreenState()
     }
 }

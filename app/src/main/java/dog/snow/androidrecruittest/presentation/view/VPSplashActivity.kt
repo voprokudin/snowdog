@@ -8,16 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.VPActivity
-import dog.snow.androidrecruittest.data.model.VPRawAlbum
-import dog.snow.androidrecruittest.data.model.VPRawPhoto
-import dog.snow.androidrecruittest.data.model.VPRawUser
 import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
+import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowData
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowGeneralError
 import kotlinx.android.synthetic.main.layout_progressbar.*
-import java.util.ArrayList
 import javax.inject.Inject
 
 class VPSplashActivity : VPActivity() {
@@ -81,7 +78,7 @@ class VPSplashActivity : VPActivity() {
         }
     }
 
-    private fun showData(photos: List<VPRawUser>) {
+    private fun showData(photos: List<VPListItem>) {
         println(photos)
         hideProgressBar()
 //        navigator.openHomeActivity()
