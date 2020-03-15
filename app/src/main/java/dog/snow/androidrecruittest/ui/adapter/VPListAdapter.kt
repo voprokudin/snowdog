@@ -31,7 +31,7 @@ class VPListAdapter(
 
     inner class VPViewHolder(
         private val view: View,
-        private val productClickedListener: VPItemClickedListener
+        private val itemsClickedListener: VPItemClickedListener
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(item: String) = with(view) {
@@ -39,7 +39,7 @@ class VPListAdapter(
             tvPhotoTitle.text = item
             tvAlbumTitle.text = item
             //TODO: display item.thumbnailUrl in ivThumb
-            setOnClickListener { productClickedListener.onItemRowClicked() }
+            setOnClickListener { itemsClickedListener.onItemRowClicked() }
         }
     }
 }

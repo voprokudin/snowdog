@@ -10,7 +10,7 @@ class VPDetailsFragment : VPFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(): VPListFragment = VPListFragment()
+        fun newInstance(): VPDetailsFragment = VPDetailsFragment()
     }
 
     override val getLayoutResId: Int = R.layout.details_fragment

@@ -50,7 +50,7 @@ class VPListFragment :
     }
 
     private fun setupViewModel() {
-        viewModel.screenState.observe(viewLifecycleOwner, ScreenActionObserver())
+        viewModel.screenState.observe(this, ScreenActionObserver())
     }
 
     private fun showData(items: ArrayList<String>) {
@@ -63,7 +63,7 @@ class VPListFragment :
         rvItems.run {
             visibility = View.VISIBLE
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(activity)
             adapter = listAdapter
 //            addItemDecoration(VPDividerItemDecoration(resources.getDrawable(R.drawable.vp_line_devider)))
         }
@@ -71,7 +71,7 @@ class VPListFragment :
 
     private fun showError(errorMessage: String?) {
         val r = Runnable {
-            MaterialAlertDialogBuilder(context)
+            MaterialAlertDialogBuilder(activity)
                 .setTitle(R.string.cant_download_dialog_title)
                 .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
                 .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ ->  getData()}
@@ -84,6 +84,7 @@ class VPListFragment :
     }
 
     override fun onItemRowClicked() {
+        Toast.makeText(activity, "This is my Toast message!", Toast.LENGTH_SHORT).show()
         navigator.showDetailsFragment()
     }
 
