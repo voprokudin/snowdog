@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout" />
+
+    <style name="Widget.AppTheme.Banner" parent="@style/Widget.MaterialComponents.TextView" />
+
+    <!-- ProgressBar -->
+    <style name="Vp_MaterialHorizontalProgressBar" parent="Widget.MaterialProgressBar.ProgressBar.Horizontal">
+        <item name="android:indeterminate">true</item>
+        <item name="mpb_indeterminateTint">@color/color_accent</item>
+        <item name="mpb_showProgressBackground">false</item>
+        <item name="mpb_progressStyle">horizontal</item>
+        <item name="mpb_useIntrinsicPadding">false</item>
+        <item name="android:minHeight">3dp</item>
+        <item name="android:maxHeight">3dp</item>
+    </style>
+    <!-- ProgressBar -->
+</resources>
