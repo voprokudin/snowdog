@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentManager
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.VPActivity
 import dog.snow.androidrecruittest.common.intentfactory.VPHomeIntentFactory
+import dog.snow.androidrecruittest.ui.VPDetailsFragment
 import dog.snow.androidrecruittest.ui.VPListFragment
 import dog.snow.androidrecruittest.util.fragment.VPFragmentUtil
 import javax.inject.Inject
@@ -39,16 +40,16 @@ class VPNavigator
         )
     }
 
-//    fun showProductsDetailsFragment(productCode: String) {
-//        if (isFragmentAlreadyShown<VPProductDetailFragment>()) return
-//
-//        fragmentUtil.replaceFragmentAllowingStateLoss(
-//            fragmentManager = fragmentManager,
-//            fragment = VPProductDetailFragment.newInstance(productCode),
-//            containerViewId = FRAGMENT_CONTAINER,
-//            addToBackStack = true
-//        )
-//    }
+    fun showDetailsFragment() {
+        if (isFragmentAlreadyShown<VPDetailsFragment>()) return
+
+        fragmentUtil.replaceFragmentAllowingStateLoss(
+            fragmentManager = fragmentManager,
+            fragment = VPDetailsFragment.newInstance(),
+            containerViewId = FRAGMENT_CONTAINER,
+            addToBackStack = true
+        )
+    }
 
     private inline fun <reified T> isFragmentAlreadyShown() = fragmentUtil.findFragment(fragmentManager, FRAGMENT_CONTAINER) is T
 }

@@ -11,6 +11,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.VPFragment
 import dog.snow.androidrecruittest.extensions.obtainViewModel
+import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
 import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
@@ -27,6 +28,9 @@ class VPListFragment :
         @JvmStatic
         fun newInstance(): VPListFragment = VPListFragment()
     }
+
+    @Inject
+    lateinit var navigator: VPNavigator
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -80,7 +84,7 @@ class VPListFragment :
     }
 
     override fun onItemRowClicked() {
-
+        navigator.showDetailsFragment()
     }
 
     private inner class ScreenActionObserver : Observer<VPListFragmentViewModel.ScreenState> {
