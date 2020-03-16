@@ -4,18 +4,16 @@ import dog.snow.androidrecruittest.data.model.VPRawAlbum
 import dog.snow.androidrecruittest.data.model.VPRawPhoto
 import dog.snow.androidrecruittest.data.rest.VPAlbumService
 import dog.snow.androidrecruittest.data.rest.VPPhotoService
-import dog.snow.androidrecruittest.data.rest.VPUserService
 import dog.snow.androidrecruittest.domain.interactor.base.VPSingleUseCase
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
-class VPGetPhotosUseCase
+class VPGetListItemsUseCase
 @Inject constructor(
     private val photoService: VPPhotoService,
-    private val albumService: VPAlbumService,
-    private val userService: VPUserService
+    private val albumService: VPAlbumService
 ) : VPSingleUseCase<List<VPListItem>, Unit>() {
 
     companion object {
@@ -26,7 +24,7 @@ class VPGetPhotosUseCase
         Single.zip(
             getPhotos(),
             getAlbums(),
-            BiFunction<ArrayList<VPRawPhoto>, List<VPRawAlbum>, List<VPListItem>> { photo, album -> createListItem(photo, album) }
+            BiFunction<ArrayList<VPRawPhoto>, List<VPRawAlbum>, List<VPListItem>> { photos, albums -> createListItem(photos, albums) }
         )
 
     private fun getPhotos() = photoService.getPhotos(PHOTO_LIMIT)
@@ -49,8 +47,10 @@ class VPGetPhotosUseCase
             val album = albums.find { it.id == photo.albumId }!!
             val listItem = VPListItem(
                 id = photo.id,
+                userId = album.userId,
                 title = photo.title,
                 albumTitle = album.title,
+                url = photo.url,
                 thumbnailUrl = photo.thumbnailUrl
             )
             listItems.add(listItem)
@@ -65,22 +65,4 @@ class VPGetPhotosUseCase
             .map { it.albumId }
             .distinct()
             .toList()
-
-//    private fun getUniqueUsersIds() : Single<List<Int>> =
-//        getUniqueAlbumsIds()
-//            .toObservable()
-//            .flatMapIterable { albumId -> albumId }
-//            .flatMapSingle { albumId ->  getAlbum(albumId)}
-//            .map { it.userId }
-//            .distinct()
-//            .toList()
-//
-//    private fun getUsers() : Single<List<VPRawUser>> =
-//        getUniqueUsersIds()
-//            .toObservable()
-//            .flatMapIterable { userId -> userId }
-//            .flatMapSingle { userId -> getUser(userId) }
-//            .toList()
-
-//    private fun getUser(userId: Int) = userService.getUser(userId)
 }

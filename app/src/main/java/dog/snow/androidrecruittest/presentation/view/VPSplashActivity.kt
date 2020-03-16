@@ -12,7 +12,7 @@ import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
-import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowData
+import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.FetchDetails
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowGeneralError
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
@@ -40,7 +40,7 @@ class VPSplashActivity : VPActivity() {
 
     private fun fetchData() {
         showProgressBar()
-        viewModel.fetchData()
+        viewModel.fetchListItems()
     }
 
     private fun showError(errorMessage: String?) {
@@ -72,20 +72,16 @@ class VPSplashActivity : VPActivity() {
             screenAction ?: return
 
             when (screenAction) {
-                is ShowData -> showData(screenAction.photos)
+                is FetchDetails -> fetchDetails(screenAction.listItems)
                 is ShowGeneralError -> showError(screenAction.errorMessage)
             }
         }
     }
 
-    private fun showData(photos: List<VPListItem>) {
-        println(photos)
-        hideProgressBar()
+    private fun fetchDetails(listItems: List<VPListItem>) {
+        println(listItems)
+        viewModel.fetchDetails(listItems)
+//        hideProgressBar()
 //        navigator.openHomeActivity()
-//        val r = Runnable {
-//            hideProgressBar()
-//            navigator.openHomeActivity()
-//        }
-//        Handler().postDelayed(r, 2000)
     }
 }
