@@ -6,5 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/offline_mode"
+    android:gravity="center"
+    android:padding="@dimen/spacing_normal"
+    android:background="@color/dark_accent_color"
+    android:textColor="@color/light_background_color"
     android:visibility="gone"
-    tools:visibility="visible" />
+    tools:visibility="visible"/>

@@ -68,8 +68,8 @@ class VPSplashActivity : VPActivity() {
     }
 
     private fun showListFragment() {
-        hideProgressBar()
         navigator.openHomeActivity()
+        hideProgressBar()
         finish()
     }
 

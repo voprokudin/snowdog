@@ -11,5 +11,5 @@
 
     <include
         android:id="@+id/offlineMode"
-        layout="@layout/layout_banner" />
+        layout="@layout/layout_banner"/>
 </com.google.android.material.appbar.AppBarLayout>

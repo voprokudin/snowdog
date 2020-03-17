@@ -19,7 +19,6 @@ abstract class VPActivity : DaggerAppCompatActivity() {
 
     private fun initActionBar() {
         setSupportActionBar(toolbar)
-//        setToolbarNavigationIcon(R.drawable.ic_back)
         toolbar?.setNavigationOnClickListener { onToolbarNavigateUp() }
         configureActionBar(supportActionBar)
     }

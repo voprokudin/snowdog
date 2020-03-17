@@ -3,6 +3,8 @@
 
     <style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout" />
 
-    <style name="Widget.AppTheme.Banner" parent="@style/Widget.MaterialComponents.TextView" />
+    <style name="Widget.AppTheme.Banner" parent="@style/Widget.MaterialComponents.TextView">
+        <item name="android:color">@color/dark_accent_color</item>
+    </style>
 
 </resources>
