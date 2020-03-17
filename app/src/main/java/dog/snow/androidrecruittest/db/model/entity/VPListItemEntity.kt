@@ -11,12 +11,12 @@ data class VPListItemEntity(
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = C.RoomDatabase.Data.ID) val id: Long,
-    @ColumnInfo(name = C.RoomDatabase.Data.USER_ID) val userId: Long? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.TITLE) val title: String? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.ALBUM_TITLE) val albumTitle: String? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.USERNAME) val username: String? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.EMAIL) val email: String? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.PHONE) val phone: String? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.URL) val url: String? = null,
-    @ColumnInfo(name = C.RoomDatabase.Data.THUMBNAIL_URL) val thumbnailUrl: String? = null
+    @ColumnInfo(name = C.RoomDatabase.Data.USER_ID) val userId: Long,
+    @ColumnInfo(name = C.RoomDatabase.Data.TITLE) val title: String,
+    @ColumnInfo(name = C.RoomDatabase.Data.ALBUM_TITLE) val albumTitle: String,
+    @ColumnInfo(name = C.RoomDatabase.Data.USERNAME) val username: String,
+    @ColumnInfo(name = C.RoomDatabase.Data.EMAIL) val email: String,
+    @ColumnInfo(name = C.RoomDatabase.Data.PHONE) val phone: String,
+    @ColumnInfo(name = C.RoomDatabase.Data.URL) val url: String,
+    @ColumnInfo(name = C.RoomDatabase.Data.THUMBNAIL_URL) val thumbnailUrl: String
 )

@@ -9,10 +9,12 @@ import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.presentation.view.VPListFragment
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
-import kotlinx.android.synthetic.main.list_item.view.*
+import kotlinx.android.synthetic.main.list_item.view.tvPhotoTitle
+import kotlinx.android.synthetic.main.list_item.view.tvAlbumTitle
+import kotlinx.android.synthetic.main.list_item.view.ivThumb
 
 class VPListAdapter(
-    private val items: List<VPListItem>,
+    private var items: List<VPListItem>,
     private val itemsClickedListener: VPItemClickedListener,
     private val requireContext: VPListFragment
 ) : RecyclerView.Adapter<VPListAdapter.VPViewHolder>() {
@@ -27,6 +29,11 @@ class VPListAdapter(
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun updateList(listItems: List<VPListItem>) {
+        items = listItems
+        notifyDataSetChanged()
+    }
 
     inner class VPViewHolder(
         private val view: View,
