@@ -11,8 +11,10 @@ import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
-import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.*
-import kotlinx.android.synthetic.main.layout_progressbar.*
+import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.SaveListItem
+import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowListFragment
+import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowGeneralError
+import kotlinx.android.synthetic.main.layout_progressbar.progressbar
 import javax.inject.Inject
 
 class VPSplashActivity : VPActivity() {
@@ -68,6 +70,7 @@ class VPSplashActivity : VPActivity() {
     private fun showListFragment() {
         hideProgressBar()
         navigator.openHomeActivity()
+        finish()
     }
 
     private inner class ScreenActionObserver : Observer<VPSplashViewModel.ScreenState> {
