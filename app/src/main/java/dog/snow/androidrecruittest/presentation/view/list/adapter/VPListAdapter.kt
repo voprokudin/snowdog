@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
+import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.util.ArrayList
 
 class VPListAdapter(
-    private val items: ArrayList<String>,
+    private val items: List<VPListItem>,
     private val itemsClickedListener: VPItemClickedListener
 ) : RecyclerView.Adapter<VPListAdapter.VPViewHolder>() {
 
@@ -31,12 +32,12 @@ class VPListAdapter(
         private val itemsClickedListener: VPItemClickedListener
     ) : RecyclerView.ViewHolder(view) {
 
-        fun bind(item: String) = with(view) {
+        fun bind(item: VPListItem) = with(view) {
 //            val ivThumb: ImageView = findViewById(R.id.iv_thumb)
-            tvPhotoTitle.text = item
-            tvAlbumTitle.text = item
+            tvPhotoTitle.text = item.title
+            tvAlbumTitle.text = item.albumTitle
             //TODO: display item.thumbnailUrl in ivThumb
-            setOnClickListener { itemsClickedListener.onItemRowClicked() }
+            setOnClickListener { itemsClickedListener.onItemRowClicked(item.id) }
         }
     }
 }

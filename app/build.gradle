@@ -44,6 +44,7 @@ def rxJavaVersion = '2.0.1'
 def lifecycleVersion = "2.1.0"
 def daggerVersion = '2.23.1'
 def materialProgressBarVersion = '1.6.1'
+def roomVersion = '2.2.4'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -73,6 +74,10 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    // Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -9,6 +9,6 @@ interface VPAlbumService {
 
     @GET("albums/{albumId}")
     fun getAlbum(
-        @Path("albumId") albumId: Int
+        @Path("albumId") albumId: Long
     ): Single<VPRawAlbum>
 }

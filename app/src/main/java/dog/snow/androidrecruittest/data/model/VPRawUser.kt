@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class VPRawUser(
-    val id: Int,
+    val id: Long,
     val name: String,
     val username: String,
     val email: String,

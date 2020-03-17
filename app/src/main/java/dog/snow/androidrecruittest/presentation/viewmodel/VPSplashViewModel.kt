@@ -3,37 +3,40 @@ package dog.snow.androidrecruittest.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dog.snow.androidrecruittest.data.model.VPRawUser
-import dog.snow.androidrecruittest.domain.interactor.VPGetDetailsUseCase
 import dog.snow.androidrecruittest.domain.interactor.VPGetListItemsUseCase
+import dog.snow.androidrecruittest.domain.interactor.VPGetLocalListItemsUseCase
+import dog.snow.androidrecruittest.domain.interactor.VPSaveListItemsUseCase
 import dog.snow.androidrecruittest.domain.interactor.base.VPEmptySingleObserver
-import dog.snow.androidrecruittest.presentation.view.list.model.VPDetail
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
+import dog.snow.androidrecruittest.util.network.VPNetworkStateProvider
 import javax.inject.Inject
 
 class VPSplashViewModel
 @Inject constructor(
     private val getListItemsUseCase: VPGetListItemsUseCase,
-    private val getDetailsUseCase: VPGetDetailsUseCase
+    private val saveListItemsUseCase: VPSaveListItemsUseCase,
+    private val networkStateProvider: VPNetworkStateProvider
 ) : ViewModel() {
 
     val screenState: LiveData<ScreenState> by lazy { mutableScreenState }
 
     private val mutableScreenState = MutableLiveData<ScreenState>()
 
-    fun fetchListItems() {
+    private fun fetchListItems() {
         getListItemsUseCase.execute(observer = GetListItemsObserver())
     }
 
-    fun fetchDetails(listItems: List<VPListItem>) {
-        getDetailsUseCase.execute(observer = GetDetailsObserver(), params = listItems)
+    fun saveListItems(listItems: List<VPListItem>) {
+        saveListItemsUseCase.execute(observer = SaveListItemsObserver(), params = listItems)
+    }
+
+    fun maybeFetchListItems() {
+        if (networkStateProvider.isNetworkConnected()) fetchListItems() else mutableScreenState.value = ScreenState.ShowListFragment
     }
 
     internal inner class GetListItemsObserver : VPEmptySingleObserver<List<VPListItem>>() {
         override fun onSuccess(result: List<VPListItem>) {
-            println(result)
-            println(result.size)
-            mutableScreenState.value = ScreenState.FetchDetails(result)
+            mutableScreenState.value = ScreenState.SaveListItem(result)
         }
 
         override fun onError(throwable: Throwable) {
@@ -41,11 +44,9 @@ class VPSplashViewModel
         }
     }
 
-    internal inner class GetDetailsObserver : VPEmptySingleObserver<List<VPDetail>>() {
-        override fun onSuccess(result: List<VPDetail>) {
-            println(result)
-            println(result.size)
-            mutableScreenState.value = ScreenState.ShowData(result)
+    internal inner class SaveListItemsObserver : VPEmptySingleObserver<List<Long>>() {
+        override fun onSuccess(result: List<Long>) {
+            mutableScreenState.value = ScreenState.ShowListFragment
         }
 
         override fun onError(throwable: Throwable) {
@@ -54,8 +55,8 @@ class VPSplashViewModel
     }
 
     sealed class ScreenState {
-        class FetchDetails(val listItems: List<VPListItem>) : ScreenState()
-        class ShowData(val details: List<VPDetail>) : ScreenState()
+        object ShowListFragment : ScreenState()
+        class SaveListItem(val listItems: List<VPListItem>) : ScreenState()
         class ShowGeneralError(val errorMessage: String?) : ScreenState()
     }
 }

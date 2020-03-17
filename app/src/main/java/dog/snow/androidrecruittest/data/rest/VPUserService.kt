@@ -9,6 +9,6 @@ interface VPUserService {
 
     @GET("users/{userId}")
     fun getUser(
-        @Path("userId") userId: Int
+        @Path("userId") userId: Long
     ): Single<VPRawUser>
 }

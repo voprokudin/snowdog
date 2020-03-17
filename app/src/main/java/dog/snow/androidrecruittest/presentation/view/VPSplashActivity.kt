@@ -1,7 +1,6 @@
 package dog.snow.androidrecruittest.presentation.view
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,8 +11,7 @@ import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel
-import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.FetchDetails
-import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.ShowGeneralError
+import dog.snow.androidrecruittest.presentation.viewmodel.VPSplashViewModel.ScreenState.*
 import kotlinx.android.synthetic.main.layout_progressbar.*
 import javax.inject.Inject
 
@@ -31,32 +29,28 @@ class VPSplashActivity : VPActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_activity)
         setupViewModel()
-        fetchData()
+        maybeFetchListItems()
+    }
+
+    private fun maybeFetchListItems() {
+        showProgressBar()
+        viewModel.maybeFetchListItems()
     }
 
     private fun setupViewModel() {
         viewModel.screenState.observe(this, ScreenActionObserver())
     }
 
-    private fun fetchData() {
-        showProgressBar()
-        viewModel.fetchListItems()
-    }
-
     private fun showError(errorMessage: String?) {
-        val r = Runnable {
-            hideProgressBar()
-
-            MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.cant_download_dialog_title)
-                .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
-                .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ ->  fetchData()}
-                .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ -> finish() }
-                .create()
-                .apply { setCanceledOnTouchOutside(false) }
-                .show()
-        }
-        Handler().postDelayed(r, 2000)
+        hideProgressBar()
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.cant_download_dialog_title)
+            .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
+            .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ ->  maybeFetchListItems()}
+            .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ -> finish() }
+            .create()
+            .apply { setCanceledOnTouchOutside(false) }
+            .show()
     }
 
     private fun showProgressBar() {
@@ -67,21 +61,24 @@ class VPSplashActivity : VPActivity() {
         progressbar.visibility = View.GONE
     }
 
+    private fun saveListItems(listItems: List<VPListItem>) {
+        viewModel.saveListItems(listItems)
+    }
+
+    private fun showListFragment() {
+        hideProgressBar()
+        navigator.openHomeActivity()
+    }
+
     private inner class ScreenActionObserver : Observer<VPSplashViewModel.ScreenState> {
         override fun onChanged(screenAction: VPSplashViewModel.ScreenState?) {
             screenAction ?: return
 
             when (screenAction) {
-                is FetchDetails -> fetchDetails(screenAction.listItems)
+                is SaveListItem -> saveListItems(screenAction.listItems)
+                is ShowListFragment -> showListFragment()
                 is ShowGeneralError -> showError(screenAction.errorMessage)
             }
         }
-    }
-
-    private fun fetchDetails(listItems: List<VPListItem>) {
-        println(listItems)
-        viewModel.fetchDetails(listItems)
-//        hideProgressBar()
-//        navigator.openHomeActivity()
     }
 }

@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class VPRawAlbum(
-    val id: Int,
-    val userId: Int,
+    val id: Long,
+    val userId: Long,
     val title: String
 ) : Parcelable

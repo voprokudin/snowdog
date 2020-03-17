@@ -1,12 +1,19 @@
 package dog.snow.androidrecruittest.domain.interactor.base
 
+import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 
 interface VPExecutableUseCase {
 
-    interface Single<Results, in Params> {
+    interface Completable<in Params> {
+        fun execute(
+            observer: DisposableCompletableObserver = VPEmptyCompletableObserver(),
+            params: Params? = null
+        )
+    }
 
+    interface Single<Results, in Params> {
         fun execute(
             observer: DisposableSingleObserver<Results> = VPEmptySingleObserver(),
             params: Params? = null

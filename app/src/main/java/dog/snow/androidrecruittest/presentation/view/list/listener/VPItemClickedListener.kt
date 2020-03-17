@@ -2,5 +2,5 @@ package dog.snow.androidrecruittest.presentation.view.list.listener
 
 interface VPItemClickedListener {
 
-    fun onItemRowClicked()
+    fun onItemRowClicked(id: Long)
 }

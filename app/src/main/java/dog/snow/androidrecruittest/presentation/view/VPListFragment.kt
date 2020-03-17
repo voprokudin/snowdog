@@ -15,6 +15,9 @@ import dog.snow.androidrecruittest.presentation.navigation.VPNavigator
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
 import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel
 import dog.snow.androidrecruittest.presentation.view.list.adapter.VPListAdapter
+import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
+import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel.ScreenState.ShowGeneralError
+import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel.ScreenState.ShowData
 import kotlinx.android.synthetic.main.list_fragment.*
 import java.util.ArrayList
 import javax.inject.Inject
@@ -42,18 +45,18 @@ class VPListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
-        getData()
+        getLocalListItems()
     }
 
-    private fun getData() {
-        viewModel.getData()
+    private fun getLocalListItems() {
+        viewModel.getLocalListItems()
     }
 
     private fun setupViewModel() {
         viewModel.screenState.observe(viewLifecycleOwner, ScreenActionObserver())
     }
 
-    private fun showData(items: ArrayList<String>) {
+    private fun showData(items: List<VPListItem>) {
         emptyView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
 
         val listAdapter =
@@ -70,21 +73,18 @@ class VPListFragment :
     }
 
     private fun showError(errorMessage: String?) {
-        val r = Runnable {
-            MaterialAlertDialogBuilder(activity)
-                .setTitle(R.string.cant_download_dialog_title)
-                .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
-                .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ ->  getData()}
-                .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ ->  }
-                .create()
-                .apply { setCanceledOnTouchOutside(false) }
-                .show()
-        }
-        Handler().postDelayed(r, 2000)
+        MaterialAlertDialogBuilder(activity)
+            .setTitle(R.string.cant_download_dialog_title)
+            .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
+            .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ ->  getLocalListItems()}
+            .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ ->  }
+            .create()
+            .apply { setCanceledOnTouchOutside(false) }
+            .show()
     }
 
-    override fun onItemRowClicked() {
-        Toast.makeText(activity, "This is my Toast message!", Toast.LENGTH_SHORT).show()
+    override fun onItemRowClicked(id: Long) {
+        Toast.makeText(activity, "This is my Toast message!$id", Toast.LENGTH_SHORT).show()
         navigator.showDetailsFragment()
     }
 
@@ -93,8 +93,8 @@ class VPListFragment :
             screenAction ?: return
 
             when (screenAction) {
-                is VPListFragmentViewModel.ScreenState.ShowData -> showData(screenAction.items)
-                is VPListFragmentViewModel.ScreenState.ShowGeneralError -> showError(screenAction.errorMessage)
+                is ShowData -> showData(screenAction.items)
+                is ShowGeneralError -> showError(screenAction.errorMessage)
             }
         }
     }
