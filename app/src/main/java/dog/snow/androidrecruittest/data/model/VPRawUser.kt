@@ -1,9 +1,5 @@
 package dog.snow.androidrecruittest.data.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
 data class VPRawUser(
     val id: Long,
     val name: String,
@@ -13,23 +9,19 @@ data class VPRawUser(
     val phone: String,
     val website: String,
     val company: RawCompany
-) : Parcelable {
-    @Parcelize
+) {
     data class RawAddress(
         val street: String,
         val suite: String,
         val city: String,
         val zipcode: String,
         val geo: RawGeo
-    ) : Parcelable {
-        @Parcelize
-        data class RawGeo(val lat: String, val lng: String) : Parcelable
+    ) {
+        data class RawGeo(val lat: String, val lng: String)
     }
-
-    @Parcelize
     data class RawCompany(
         val name: String,
         val catchPhrase: String,
         val bs: String
-    ) : Parcelable
+    )
 }

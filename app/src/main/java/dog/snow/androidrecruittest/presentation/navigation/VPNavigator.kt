@@ -6,6 +6,7 @@ import dog.snow.androidrecruittest.base.VPActivity
 import dog.snow.androidrecruittest.common.intentfactory.VPHomeIntentFactory
 import dog.snow.androidrecruittest.presentation.view.VPDetailsFragment
 import dog.snow.androidrecruittest.presentation.view.VPListFragment
+import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import dog.snow.androidrecruittest.util.fragment.VPFragmentUtil
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -40,12 +41,12 @@ class VPNavigator
         )
     }
 
-    fun showDetailsFragment() {
+    fun showDetailsFragment(listItem: VPListItem) {
         if (isFragmentAlreadyShown<VPDetailsFragment>()) return
 
         fragmentUtil.replaceFragmentAllowingStateLoss(
             fragmentManager = fragmentManager,
-            fragment = VPDetailsFragment.newInstance(),
+            fragment = VPDetailsFragment.newInstance(listItem),
             containerViewId = FRAGMENT_CONTAINER,
             addToBackStack = true
         )

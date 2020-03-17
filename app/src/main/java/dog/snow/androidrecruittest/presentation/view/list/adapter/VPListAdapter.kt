@@ -4,20 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import dog.snow.androidrecruittest.R
+import dog.snow.androidrecruittest.presentation.view.VPListFragment
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import kotlinx.android.synthetic.main.list_item.view.*
-import java.util.ArrayList
 
 class VPListAdapter(
     private val items: List<VPListItem>,
-    private val itemsClickedListener: VPItemClickedListener
+    private val itemsClickedListener: VPItemClickedListener,
+    private val requireContext: VPListFragment
 ) : RecyclerView.Adapter<VPListAdapter.VPViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VPViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return VPViewHolder(itemView, itemsClickedListener)
     }
 
@@ -33,11 +34,13 @@ class VPListAdapter(
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(item: VPListItem) = with(view) {
-//            val ivThumb: ImageView = findViewById(R.id.iv_thumb)
+            Glide.with(requireContext)
+                .load(item.thumbnailUrl)
+                .placeholder(R.drawable.ic_placeholder)
+                .into(ivThumb)
             tvPhotoTitle.text = item.title
             tvAlbumTitle.text = item.albumTitle
-            //TODO: display item.thumbnailUrl in ivThumb
-            setOnClickListener { itemsClickedListener.onItemRowClicked(item.id) }
+            setOnClickListener { itemsClickedListener.onItemRowClicked(item) }
         }
     }
 }

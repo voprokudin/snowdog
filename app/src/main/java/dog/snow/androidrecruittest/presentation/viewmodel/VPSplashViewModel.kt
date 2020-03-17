@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dog.snow.androidrecruittest.domain.interactor.VPGetListItemsUseCase
-import dog.snow.androidrecruittest.domain.interactor.VPGetLocalListItemsUseCase
 import dog.snow.androidrecruittest.domain.interactor.VPSaveListItemsUseCase
 import dog.snow.androidrecruittest.domain.interactor.base.VPEmptySingleObserver
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem

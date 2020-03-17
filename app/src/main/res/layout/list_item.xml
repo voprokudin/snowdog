@@ -11,8 +11,6 @@
         android:id="@+id/ivThumb"
         android:layout_width="@dimen/thumb_size"
         android:layout_height="@dimen/thumb_size"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
         android:src="?attr/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,9 +1,7 @@
 package dog.snow.androidrecruittest.presentation.view
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +16,8 @@ import dog.snow.androidrecruittest.presentation.view.list.adapter.VPListAdapter
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel.ScreenState.ShowGeneralError
 import dog.snow.androidrecruittest.presentation.viewmodel.VPListFragmentViewModel.ScreenState.ShowData
-import kotlinx.android.synthetic.main.list_fragment.*
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.list_fragment.emptyView
+import kotlinx.android.synthetic.main.list_fragment.rvItems
 import javax.inject.Inject
 
 class VPListFragment :
@@ -28,8 +26,7 @@ class VPListFragment :
 
     companion object {
         @JvmStatic
-        fun newInstance(): VPListFragment =
-            VPListFragment()
+        fun newInstance(): VPListFragment = VPListFragment()
     }
 
     @Inject
@@ -48,6 +45,10 @@ class VPListFragment :
         getLocalListItems()
     }
 
+    override fun onItemRowClicked(listItem: VPListItem) {
+        navigator.showDetailsFragment(listItem)
+    }
+
     private fun getLocalListItems() {
         viewModel.getLocalListItems()
     }
@@ -62,7 +63,8 @@ class VPListFragment :
         val listAdapter =
             VPListAdapter(
                 items = items,
-                itemsClickedListener = this
+                itemsClickedListener = this,
+                requireContext = this
             )
         rvItems.run {
             visibility = View.VISIBLE
@@ -81,11 +83,6 @@ class VPListFragment :
             .create()
             .apply { setCanceledOnTouchOutside(false) }
             .show()
-    }
-
-    override fun onItemRowClicked(id: Long) {
-        Toast.makeText(activity, "This is my Toast message!$id", Toast.LENGTH_SHORT).show()
-        navigator.showDetailsFragment()
     }
 
     private inner class ScreenActionObserver : Observer<VPListFragmentViewModel.ScreenState> {
