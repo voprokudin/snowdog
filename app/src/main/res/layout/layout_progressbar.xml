@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/progressbar"
     style="?android:attr/progressBarStyle"
-    android:indeterminateTint="@color/dark_accent_color"
+    android:indeterminateTint="@color/progress_bar_color"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"

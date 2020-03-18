@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+    <style name="Base.AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/light_primary_color</item>
+        <item name="colorPrimaryDark">@color/light_primary_dark_color</item>
+        <item name="colorAccent">@color/light_accent_color</item>
+        <item name="colorError">@color/light_error_color</item>
+    </style>
 
-    <style name="AppTheme" parent="Base.AppTheme" />
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:colorPrimaryDark">@color/status_bar_bg</item>
+        <!-- Status bar stuff-->
+        <item name="android:statusBarColor">@color/status_bar_bg</item>
+        <item name="android:windowLightStatusBar">@bool/windowLightStatusBar</item>
+    </style>
 
-    <style name="AppTheme.SplashTheme" />
+    <style name="AppTheme.SplashTheme">
+        <item name="android:colorPrimaryDark">@color/splash_bg</item>
+        <!-- Status bar stuff-->
+        <item name="android:statusBarColor">@color/splash_bg</item>
+        <item name="android:windowLightStatusBar">@bool/windowLightStatusBar</item>
+    </style>
 
 </resources>
