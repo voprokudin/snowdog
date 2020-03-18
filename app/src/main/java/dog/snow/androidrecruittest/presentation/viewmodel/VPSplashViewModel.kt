@@ -21,16 +21,17 @@ class VPSplashViewModel
 
     private val mutableScreenState = MutableLiveData<ScreenState>()
 
-    private fun fetchListItems() {
-        getListItemsUseCase.execute(observer = GetListItemsObserver())
+    fun maybeFetchListItems() {
+        if (networkStateProvider.isNetworkConnected()) fetchListItems() else mutableScreenState.value = ScreenState.ShowListFragmentWithoutAnimation
     }
 
     fun saveListItems(listItems: List<VPListItem>) {
         saveListItemsUseCase.execute(observer = SaveListItemsObserver(), params = listItems)
     }
 
-    fun maybeFetchListItems() {
-        if (networkStateProvider.isNetworkConnected()) fetchListItems() else mutableScreenState.value = ScreenState.ShowListFragment
+    private fun fetchListItems() {
+        mutableScreenState.value = ScreenState.SetUpView
+        getListItemsUseCase.execute(observer = GetListItemsObserver())
     }
 
     internal inner class GetListItemsObserver : VPEmptySingleObserver<List<VPListItem>>() {
@@ -55,6 +56,8 @@ class VPSplashViewModel
 
     sealed class ScreenState {
         object ShowListFragment : ScreenState()
+        object ShowListFragmentWithoutAnimation : ScreenState()
+        object SetUpView : ScreenState()
         class SaveListItem(val listItems: List<VPListItem>) : ScreenState()
         class ShowGeneralError(val errorMessage: String?) : ScreenState()
     }

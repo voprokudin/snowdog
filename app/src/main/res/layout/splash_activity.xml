@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/splashLayout"
     tools:context=".presentation.view.VPSplashActivity">
 
     <ImageView
-        android:id="@+id/iv_logo_sd_symbol"
+        android:id="@+id/ivLogoSdSymbol"
         style="@style/VPLogoSdSymbol"
         android:layout_width="@dimen/splash_logo_sd_symbol"
         android:layout_height="@dimen/splash_logo_sd_symbol"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_logo_sd_text"
+        app:layout_constraintEnd_toStartOf="@id/ivLogoSdText"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_logo_sd_text"
+        android:id="@+id/ivLogoSdText"
         style="@style/VPLogoSdText"
         android:layout_width="@dimen/splash_logo_sd_text_width"
         android:layout_height="@dimen/splash_logo_sd_text_height"
@@ -27,7 +28,7 @@
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_logo_sd_symbol"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoSdSymbol"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
@@ -38,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo_sd_symbol"
+        app:layout_constraintTop_toBottomOf="@id/ivLogoSdSymbol"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

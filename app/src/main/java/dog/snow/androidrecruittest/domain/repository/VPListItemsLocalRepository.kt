@@ -1,6 +1,5 @@
 package dog.snow.androidrecruittest.domain.repository
 
-import dog.snow.androidrecruittest.db.model.entity.VPListItemEntity
 import dog.snow.androidrecruittest.presentation.view.list.model.VPListItem
 import io.reactivex.Single
 
