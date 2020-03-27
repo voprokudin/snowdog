@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.presentation.view.VPListFragment
 import dog.snow.androidrecruittest.presentation.view.list.listener.VPItemClickedListener
@@ -41,8 +43,10 @@ class VPListAdapter(
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(item: VPListItem) = with(view) {
+            val header = LazyHeaders.Builder().addHeader("user-agent", "").build()
+            val glideUrl = GlideUrl(item.thumbnailUrl, header)
             Glide.with(requireContext)
-                .load(item.thumbnailUrl)
+                .load(glideUrl)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(ivThumb)
             tvPhotoTitle.text = item.title
