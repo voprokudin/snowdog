@@ -14,6 +14,7 @@ import dog.snow.androidrecruittest.db.RoomDatabase
 import dog.snow.androidrecruittest.domain.repository.ListItemsLocalRepository
 import dog.snow.androidrecruittest.presentation.factory.HomeIntentFactoryImpl
 import dog.snow.androidrecruittest.presentation.navigation.Navigator
+import dog.snow.androidrecruittest.presentation.view.list.adapter.ListItemsAdapter
 import dog.snow.androidrecruittest.util.fragment.FragmentUtil
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -76,4 +77,7 @@ class ApplicationModule {
         fragmentUtil: FragmentUtil,
         homeIntentFactory: HomeIntentFactory
     ): Navigator = Navigator(activity, fragmentUtil, homeIntentFactory)
+
+    @Provides
+    internal fun provideListAdapter(): ListItemsAdapter = ListItemsAdapter()
 }
