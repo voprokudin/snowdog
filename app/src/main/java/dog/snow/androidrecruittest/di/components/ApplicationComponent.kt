@@ -5,20 +5,20 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import dog.snow.androidrecruittest.base.VPApplication
-import dog.snow.androidrecruittest.di.modules.VPActivityBuildersModule
-import dog.snow.androidrecruittest.di.modules.VPApplicationModule
-import dog.snow.androidrecruittest.di.modules.VPContextModule
+import dog.snow.androidrecruittest.base.App
+import dog.snow.androidrecruittest.di.modules.ActivityBuildersModule
+import dog.snow.androidrecruittest.di.modules.ApplicationModule
+import dog.snow.androidrecruittest.di.modules.ContextModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
-    VPActivityBuildersModule::class,
-    VPApplicationModule::class,
-    VPContextModule::class
+    ActivityBuildersModule::class,
+    ApplicationModule::class,
+    ContextModule::class
 ])
-interface ApplicationComponent : AndroidInjector<VPApplication> {
+interface ApplicationComponent : AndroidInjector<App> {
 
     @Component.Builder
     interface Builder {
