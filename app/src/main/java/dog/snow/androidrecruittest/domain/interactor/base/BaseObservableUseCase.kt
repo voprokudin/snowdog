@@ -3,7 +3,7 @@ package dog.snow.androidrecruittest.domain.interactor.base
 import io.reactivex.Observable
 import io.reactivex.observers.DisposableObserver
 
-abstract class ObservableUseCase<Results, in Params> :
+abstract class BaseObservableUseCase<Results, in Params> :
     BaseReactiveUseCase(),
     ExecutableUseCase.Observable<Results, Params> {
 

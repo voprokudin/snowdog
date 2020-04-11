@@ -13,7 +13,7 @@ import dog.snow.androidrecruittest.util.network.ConnectivityReceiver.Connectivit
 import kotlinx.android.synthetic.main.layout_appbar.offlineMode
 import javax.inject.Inject
 
-class BaseHomeActivity : BaseActivity(), ConnectivityReceiverListener {
+class HomeActivity : BaseActivity(), ConnectivityReceiverListener {
 
     @Inject
     lateinit var navigator: Navigator

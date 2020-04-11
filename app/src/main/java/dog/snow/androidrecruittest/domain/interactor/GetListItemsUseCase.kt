@@ -6,7 +6,7 @@ import dog.snow.androidrecruittest.data.model.RawUser
 import dog.snow.androidrecruittest.data.rest.AlbumService
 import dog.snow.androidrecruittest.data.rest.PhotoService
 import dog.snow.androidrecruittest.data.rest.UserService
-import dog.snow.androidrecruittest.domain.interactor.base.SingleUseCase
+import dog.snow.androidrecruittest.domain.interactor.base.BaseSingleUseCase
 import dog.snow.androidrecruittest.presentation.view.list.model.ListItem
 import io.reactivex.Single
 import io.reactivex.functions.Function3
@@ -17,7 +17,7 @@ class GetListItemsUseCase
     private val photoService: PhotoService,
     private val albumService: AlbumService,
     private val userService: UserService
-) : SingleUseCase<List<ListItem>, Unit>() {
+) : BaseSingleUseCase<List<ListItem>, Unit>() {
 
     companion object {
         private const val PHOTO_LIMIT = 100

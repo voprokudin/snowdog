@@ -26,13 +26,13 @@ import kotlinx.android.synthetic.main.list_fragment.emptyView
 import kotlinx.android.synthetic.main.list_fragment.rvItems
 import javax.inject.Inject
 
-class BaseListFragment :
+class ListFragment :
     BaseFragment(),
     ItemClickedListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(): BaseListFragment = BaseListFragment()
+        fun newInstance(): ListFragment = ListFragment()
     }
 
     @Inject

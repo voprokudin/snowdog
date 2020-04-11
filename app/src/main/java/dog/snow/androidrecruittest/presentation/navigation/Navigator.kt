@@ -6,8 +6,8 @@ import androidx.transition.TransitionInflater
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.BaseActivity
 import dog.snow.androidrecruittest.common.intentfactory.HomeIntentFactory
-import dog.snow.androidrecruittest.presentation.view.BaseDetailsFragment
-import dog.snow.androidrecruittest.presentation.view.BaseListFragment
+import dog.snow.androidrecruittest.presentation.view.DetailsFragment
+import dog.snow.androidrecruittest.presentation.view.ListFragment
 import dog.snow.androidrecruittest.presentation.view.list.model.ListItem
 import dog.snow.androidrecruittest.util.fragment.FragmentUtil
 import javax.inject.Inject
@@ -33,11 +33,11 @@ class Navigator
     }
 
     fun showDataListFragment() {
-        if (isFragmentAlreadyShown<BaseListFragment>()) return
+        if (isFragmentAlreadyShown<ListFragment>()) return
 
         fragmentUtil.replaceFragmentAllowingStateLoss(
             fragmentManager = fragmentManager,
-            fragment = BaseListFragment.newInstance(),
+            fragment = ListFragment.newInstance(),
             containerViewId = FRAGMENT_CONTAINER,
             addToBackStack = false,
             animate = false
@@ -45,9 +45,9 @@ class Navigator
     }
 
     fun showDetailsFragment(listItem: ListItem, imageView: ImageView) {
-        if (isFragmentAlreadyShown<BaseDetailsFragment>()) return
+        if (isFragmentAlreadyShown<DetailsFragment>()) return
 
-        val fragment = BaseDetailsFragment.newInstance(
+        val fragment = DetailsFragment.newInstance(
             listItem = listItem,
             transitionName = imageView.transitionName
         ).also {

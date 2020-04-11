@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/splashLayout"
-    tools:context=".presentation.view.BaseSplashActivity">
+    tools:context=".presentation.view.SplashActivity">
 
     <ImageView
         android:id="@+id/ivLogoSdSymbol"
-        style="@style/VPLogoSdSymbol"
+        style="@style/LogoSdSymbol"
         android:layout_width="@dimen/splash_logo_sd_symbol"
         android:layout_height="@dimen/splash_logo_sd_symbol"
         android:contentDescription="@null"
@@ -21,7 +21,7 @@
 
     <ImageView
         android:id="@+id/ivLogoSdText"
-        style="@style/VPLogoSdText"
+        style="@style/LogoSdText"
         android:layout_width="@dimen/splash_logo_sd_text_width"
         android:layout_height="@dimen/splash_logo_sd_text_height"
         android:layout_marginStart="@dimen/splash_logo_sd_text_margin"

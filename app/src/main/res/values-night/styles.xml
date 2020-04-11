@@ -3,18 +3,18 @@
 
     <style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout" />
 
-    <style name="VPTextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"/>
+    <style name="TextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"/>
 
-    <style name="VPToolbarStyle">
+    <style name="ToolbarStyle">
         <item name="logo">@drawable/ic_logo_appbar_dark</item>
         <item name="android:background">@color/toolbar_bg</item>
     </style>
 
-    <style name="VPLogoSdSymbol">
+    <style name="LogoSdSymbol">
         <item name="srcCompat">@drawable/ic_logo_sd_symbol_dark</item>
     </style>
 
-    <style name="VPLogoSdText">
+    <style name="LogoSdText">
         <item name="srcCompat">@drawable/ic_logo_sd_text_dark</item>
     </style>
 

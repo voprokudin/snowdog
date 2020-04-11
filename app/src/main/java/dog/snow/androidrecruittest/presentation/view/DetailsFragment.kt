@@ -16,15 +16,15 @@ import kotlinx.android.synthetic.main.details_fragment.tvEmail
 import kotlinx.android.synthetic.main.details_fragment.tvPhone
 import kotlinx.android.synthetic.main.details_fragment.ivPhoto
 
-class BaseDetailsFragment : BaseFragment() {
+class DetailsFragment : BaseFragment() {
 
     companion object {
         @JvmStatic
         fun newInstance(
             listItem: ListItem,
             transitionName: String
-        ) : BaseDetailsFragment {
-            val fragment = BaseDetailsFragment()
+        ) : DetailsFragment {
+            val fragment = DetailsFragment()
             val args = Bundle().apply {
                 putParcelable(Constants.BundleArgs.LIST_ITEM, listItem)
                 putString(Constants.BundleArgs.TRANSITION, transitionName)

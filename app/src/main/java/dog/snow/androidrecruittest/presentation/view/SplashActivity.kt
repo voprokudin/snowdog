@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.splash_activity.ivLogoSdText
 import kotlinx.android.synthetic.main.splash_activity.splashLayout
 import javax.inject.Inject
 
-class BaseSplashActivity : BaseActivity() {
+class SplashActivity : BaseActivity() {
 
     @Inject
     lateinit var navigator: Navigator
