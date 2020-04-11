@@ -6,7 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dog.snow.androidrecruittest.di.util.ViewModelKey
-import dog.snow.androidrecruittest.presentation.viewmodel.ListFragmentViewModel
+import dog.snow.androidrecruittest.presentation.viewmodel.HomeActivityViewModel
 import dog.snow.androidrecruittest.presentation.viewmodel.SplashViewModel
 import dog.snow.androidrecruittest.presentation.viewmodel.factory.ViewModelFactory
 
@@ -20,8 +20,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ListFragmentViewModel::class)
-    internal abstract fun bindListFragmentViewModel(listFragmentViewModel: ListFragmentViewModel): ViewModel
+    @ViewModelKey(HomeActivityViewModel::class)
+    internal abstract fun bindHomeActivityViewModel(homeActivityViewModel: HomeActivityViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

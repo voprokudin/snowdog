@@ -8,19 +8,17 @@ import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.TransitionInflater
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.base.BaseFragment
 import dog.snow.androidrecruittest.extensions.obtainViewModel
 import dog.snow.androidrecruittest.presentation.navigation.Navigator
 import dog.snow.androidrecruittest.presentation.view.list.listener.ItemClickedListener
-import dog.snow.androidrecruittest.presentation.viewmodel.ListFragmentViewModel
-import dog.snow.androidrecruittest.presentation.view.list.adapter.ListAdapter
+import dog.snow.androidrecruittest.presentation.viewmodel.HomeActivityViewModel.ScreenState.ApplySearch
+import dog.snow.androidrecruittest.presentation.viewmodel.HomeActivityViewModel.ScreenState.ShowGeneralError
+import dog.snow.androidrecruittest.presentation.view.list.adapter.ListItemsAdapter
 import dog.snow.androidrecruittest.presentation.view.list.model.ListItem
-import dog.snow.androidrecruittest.presentation.viewmodel.ListFragmentViewModel.ScreenState.ShowGeneralError
-import dog.snow.androidrecruittest.presentation.viewmodel.ListFragmentViewModel.ScreenState.ShowData
-import dog.snow.androidrecruittest.presentation.viewmodel.ListFragmentViewModel.ScreenState.ApplySearch
+import dog.snow.androidrecruittest.presentation.viewmodel.HomeActivityViewModel
 import kotlinx.android.synthetic.main.layout_search.etSearch
 import kotlinx.android.synthetic.main.list_fragment.emptyView
 import kotlinx.android.synthetic.main.list_fragment.rvItems
@@ -41,23 +39,17 @@ class ListFragment :
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by lazy { obtainViewModel<ListFragmentViewModel>(viewModelFactory) }
+    @Inject
+    lateinit var listItemsAdapter: ListItemsAdapter
 
-    private var listAdapter: ListAdapter? = null
+    private val viewModel by lazy { getBaseActivity().obtainViewModel<HomeActivityViewModel>(viewModelFactory) }
 
     override val getLayoutResId: Int = R.layout.list_fragment
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(R.transition.default_transition)
-        exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.no_transition)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView()
         setupViewModel()
-        getLocalListItems()
     }
 
     override fun onItemRowClicked(listItem: ListItem, imageView: ImageView) {
@@ -65,7 +57,7 @@ class ListFragment :
     }
 
     private fun applySearch(filteredItems: List<ListItem>) {
-        listAdapter?.updateList(filteredItems)
+        showData(filteredItems)
     }
 
     private fun getLocalListItems() {
@@ -74,20 +66,15 @@ class ListFragment :
 
     private fun setupViewModel() {
         viewModel.screenState.observe(viewLifecycleOwner, ScreenActionObserver())
+        viewModel.listItems.observe(viewLifecycleOwner, Observer { showData(it) })
     }
 
     private fun showData(items: List<ListItem>) {
         emptyView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
 
-        listAdapter = ListAdapter(
-                items = items,
-                itemsClickedListener = this
-            )
-        rvItems.run {
-            visibility = View.VISIBLE
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
-            adapter = listAdapter
+        listItemsAdapter.run {
+            itemsClickedListener = this@ListFragment
+            submitList(items.toMutableList())
         }
     }
 
@@ -103,6 +90,7 @@ class ListFragment :
     }
 
     private fun setUpView() {
+        setUpRecyclerView()
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 viewModel.performSearch(p0.toString())
@@ -115,13 +103,22 @@ class ListFragment :
         })
     }
 
-    private inner class ScreenActionObserver : Observer<ListFragmentViewModel.ScreenState> {
-        override fun onChanged(screenAction: ListFragmentViewModel.ScreenState?) {
+    private fun setUpRecyclerView() {
+        val linearLayoutManager = LinearLayoutManager(context)
+        rvItems.run {
+            visibility = View.VISIBLE
+            setHasFixedSize(true)
+            layoutManager = linearLayoutManager
+            adapter = listItemsAdapter
+        }
+    }
+
+    private inner class ScreenActionObserver : Observer<HomeActivityViewModel.ScreenState> {
+        override fun onChanged(screenAction: HomeActivityViewModel.ScreenState?) {
             screenAction ?: return
 
             when (screenAction) {
                 is ApplySearch -> applySearch(screenAction.filteredItems)
-                is ShowData -> showData(screenAction.items)
                 is ShowGeneralError -> showError(screenAction.errorMessage)
             }
         }

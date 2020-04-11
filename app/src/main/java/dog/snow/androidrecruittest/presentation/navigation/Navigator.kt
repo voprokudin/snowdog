@@ -52,7 +52,6 @@ class Navigator
             transitionName = imageView.transitionName
         ).also {
             it.sharedElementEnterTransition = TransitionInflater.from(activity).inflateTransition(R.transition.default_transition)
-            it.enterTransition = TransitionInflater.from(activity).inflateTransition(android.R.transition.no_transition)
         }
 
         fragmentUtil.replaceFragmentAllowingStateLoss(
