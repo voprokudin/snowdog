@@ -9,7 +9,7 @@ import javax.inject.Inject
 class HomeIntentFactoryImpl
 @Inject constructor(
     private val context: Application
-): HomeIntentFactory {
+) : HomeIntentFactory {
 
     override fun forHomeActivity(): Intent = Intent(context, HomeActivity::class.java)
 }

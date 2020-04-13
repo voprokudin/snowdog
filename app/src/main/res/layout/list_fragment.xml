@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.view.HomeActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvItems"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/search_size"
-        android:scrollbars="vertical"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="10"
-        tools:listitem="@layout/list_item"
-        tools:visibility="visible" />
+<layout>
+    <data>
+        <import type="dog.snow.androidrecruittest.presentation.view.list.listener.ItemClickedListener"/>
+        <import type="dog.snow.androidrecruittest.presentation.view.list.model.ListItem"/>
+        <import type="android.view.View"/>
+        <import type="java.util.List"/>
 
-    <include layout="@layout/layout_search" />
+        <variable
+            name="photos"
+            type="List&lt;ListItem&gt;"/>
 
-    <include
-        android:id="@+id/emptyView"
-        layout="@layout/layout_empty_view"
-        tools:visibility="gone" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="listener"
+            type="ItemClickedListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.view.HomeActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItems"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/search_size"
+            android:scrollbars="vertical"
+            android:photosList="@{photos}"
+            android:itemClickListener="@{listener}"
+            android:visibility="@{photos.empty ? View.GONE : View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="10"
+            tools:listitem="@layout/list_item"
+            tools:visibility="visible" />
+
+        <include layout="@layout/layout_search" />
+
+        <include
+            android:id="@+id/emptyView"
+            layout="@layout/layout_empty_view"
+            android:visibility="@{photos.empty ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

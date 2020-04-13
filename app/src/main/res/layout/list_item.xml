@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?selectableItemBackground"
-    android:padding="@dimen/margin_normal">
 
-    <ImageView
-        android:id="@+id/ivThumb"
-        android:layout_width="@dimen/thumb_size"
-        android:layout_height="@dimen/thumb_size"
-        android:src="?attr/colorPrimary"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<layout>
+    <data>
+        <import type="dog.snow.androidrecruittest.presentation.view.list.model.ListItem"/>
 
-    <TextView
-        android:id="@+id/tvPhotoTitle"
-        android:layout_width="0dp"
+        <variable
+            name="photoItem"
+            type="ListItem"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_normal"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toEndOf="@+id/ivThumb"
-        app:layout_constraintTop_toTopOf="@+id/ivThumb"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Name Name Name Name Name Name Name Name Name Name Name Name" />
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/margin_normal">
 
-    <TextView
-        android:id="@+id/tvAlbumTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintStart_toStartOf="@+id/tvPhotoTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhotoTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Description Description Description Description Description Description Description Description" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivThumb"
+            android:layout_width="@dimen/thumb_size"
+            android:layout_height="@dimen/thumb_size"
+            android:src="?attr/colorPrimary"
+            android:imageUrl="@{photoItem.thumbnailUrl}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPhotoTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@{photoItem.title}"
+            app:layout_constraintStart_toEndOf="@+id/ivThumb"
+            app:layout_constraintTop_toTopOf="@+id/ivThumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/tvAlbumTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="@{photoItem.albumTitle}"
+            app:layout_constraintStart_toStartOf="@+id/tvPhotoTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhotoTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

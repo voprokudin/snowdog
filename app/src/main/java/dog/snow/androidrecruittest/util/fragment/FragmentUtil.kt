@@ -5,7 +5,6 @@ import androidx.annotation.IdRes
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import dog.snow.androidrecruittest.base.BaseFragment
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +15,7 @@ class FragmentUtil
     fun replaceFragmentAllowingStateLoss(
         imageView: ImageView? = null,
         fragmentManager: FragmentManager,
-        fragment: BaseFragment,
+        fragment: Fragment,
         @IdRes containerViewId: Int,
         addToBackStack: Boolean,
         animate: Boolean
@@ -32,6 +31,5 @@ class FragmentUtil
         transaction.commit()
     }
 
-    fun findFragment(fragmentManager: FragmentManager, @IdRes fragmentContainerId: Int): Fragment?
-            = fragmentManager.findFragmentById(fragmentContainerId)
+    fun findFragment(fragmentManager: FragmentManager, @IdRes fragmentContainerId: Int): Fragment? = fragmentManager.findFragmentById(fragmentContainerId)
 }

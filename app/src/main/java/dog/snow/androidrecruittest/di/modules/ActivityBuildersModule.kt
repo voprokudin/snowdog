@@ -19,6 +19,5 @@ abstract class ActivityBuildersModule {
         FragmentsBindingModule::class,
         ApplicationModule::class
     ])
-    abstract fun contributeHomeActivity() : HomeActivity
-
+    abstract fun contributeHomeActivity(): HomeActivity
 }

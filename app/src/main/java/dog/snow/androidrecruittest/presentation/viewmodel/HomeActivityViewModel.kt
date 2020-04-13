@@ -21,20 +21,25 @@ class HomeActivityViewModel
 
     private val mutableListItems: MutableLiveData<List<ListItem>> = MutableLiveData<List<ListItem>>().apply { value = emptyList() }
 
+    private val initialListItems: MutableLiveData<List<ListItem>> = MutableLiveData<List<ListItem>>().apply { value = emptyList() }
+
     fun getLocalListItems() {
         getLocalListItemsUseCase.execute(observer = GetLocalListItemsObserver())
     }
 
     fun performSearch(search: String) {
         val filteredItems = getMutableListItems().filter { it.title.contains(search) || it.albumTitle.contains(search) }
-        mutableScreenState.value = ScreenState.ApplySearch(filteredItems)
+        mutableListItems.value = filteredItems
     }
 
-    private fun getMutableListItems() = mutableListItems.value!!.toMutableList()
+    private fun getMutableListItems() = initialListItems.value!!.toMutableList()
 
     internal inner class GetLocalListItemsObserver : EmptySingleObserver<List<ListItem>>() {
         override fun onSuccess(result: List<ListItem>) {
-            mutableListItems.value = result
+            result.let {
+                mutableListItems.value = it
+                initialListItems.value = it
+            }
         }
 
         override fun onError(throwable: Throwable) {
@@ -43,7 +48,6 @@ class HomeActivityViewModel
     }
 
     sealed class ScreenState {
-        class ApplySearch(val filteredItems: List<ListItem>) : ScreenState()
         class ShowGeneralError(val errorMessage: String?) : ScreenState()
     }
 }

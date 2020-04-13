@@ -39,7 +39,7 @@ class GetListItemsUseCase
         val listItems = ArrayList<ListItem>()
         for (photo in photos) {
             val album = albums.find { it.id == photo.albumId }!!
-            val user = users.find { it.id == album.userId}!!
+            val user = users.find { it.id == album.userId }!!
             val listItem = ListItem(
                 id = photo.id,
                 userId = album.userId,
@@ -60,10 +60,10 @@ class GetListItemsUseCase
         getUniqueAlbumsIds()
             .toObservable()
             .flatMapIterable { albumId -> albumId }
-            .flatMapSingle { albumId ->  getAlbum(albumId)}
+            .flatMapSingle { albumId -> getAlbum(albumId) }
             .toList()
 
-    private fun getUniqueAlbumsIds() : Single<List<Long>> =
+    private fun getUniqueAlbumsIds(): Single<List<Long>> =
         getPhotos()
             .toObservable()
             .flatMapIterable { photo -> photo }
@@ -71,14 +71,14 @@ class GetListItemsUseCase
             .distinct()
             .toList()
 
-    private fun getUsers() : Single<List<RawUser>> =
+    private fun getUsers(): Single<List<RawUser>> =
         getUniqueUsersIds()
             .toObservable()
             .flatMapIterable { userId -> userId }
             .flatMapSingle { userId -> getUser(userId) }
             .toList()
 
-    private fun getUniqueUsersIds() : Single<List<Long>> =
+    private fun getUniqueUsersIds(): Single<List<Long>> =
         getAlbums()
             .toObservable()
             .flatMapIterable { albumId -> albumId }
