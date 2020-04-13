@@ -9,5 +9,5 @@ import dog.snow.androidrecruittest.presentation.view.HomeActivity
 abstract class HomeActivityModule {
 
     @Binds
-    abstract fun providesHomeActivity(activity: HomeActivity) : BaseActivity
+    abstract fun providesHomeActivity(activity: HomeActivity): BaseActivity
 }

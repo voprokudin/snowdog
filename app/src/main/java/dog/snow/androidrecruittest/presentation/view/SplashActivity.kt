@@ -63,7 +63,7 @@ class SplashActivity : BaseActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.cant_download_dialog_title)
             .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
-            .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ ->  maybeFetchListItems()}
+            .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ -> maybeFetchListItems() }
             .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ -> finish() }
             .create()
             .apply { setCanceledOnTouchOutside(false) }

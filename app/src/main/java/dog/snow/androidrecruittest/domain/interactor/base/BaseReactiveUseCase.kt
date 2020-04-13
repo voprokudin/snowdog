@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseReactiveUseCase: Disposable {
+abstract class BaseReactiveUseCase : Disposable {
 
     protected val threadExecutorScheduler: Scheduler = Schedulers.io()
 

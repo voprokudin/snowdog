@@ -9,5 +9,5 @@ import dog.snow.androidrecruittest.base.BaseActivity
 abstract class SplashActivityModule {
 
     @Binds
-    abstract fun providesSplashActivity(activity: SplashActivity) : BaseActivity
+    abstract fun providesSplashActivity(activity: SplashActivity): BaseActivity
 }

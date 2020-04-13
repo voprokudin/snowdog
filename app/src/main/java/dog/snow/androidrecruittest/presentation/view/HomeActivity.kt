@@ -52,7 +52,7 @@ class HomeActivity : BaseActivity(), ConnectivityReceiverListener {
     }
 
     private fun setOfflineMode(connected: Boolean) {
-        offlineMode.visibility = if(connected) View.GONE else View.VISIBLE
+        offlineMode.visibility = if (connected) View.GONE else View.VISIBLE
     }
 
     private fun getLocalListItems() {

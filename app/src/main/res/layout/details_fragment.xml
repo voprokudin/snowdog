@@ -10,10 +10,6 @@
         <variable
             name="photoDetail"
             type="ListItem" />
-
-        <variable
-            name="imageTransition"
-            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +23,6 @@
             android:layout_height="0dp"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:transitionName="@{imageTransition}"
             android:imageUrl="@{photoDetail.url}"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"

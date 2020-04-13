@@ -31,6 +31,5 @@ class FragmentUtil
         transaction.commit()
     }
 
-    fun findFragment(fragmentManager: FragmentManager, @IdRes fragmentContainerId: Int): Fragment?
-            = fragmentManager.findFragmentById(fragmentContainerId)
+    fun findFragment(fragmentManager: FragmentManager, @IdRes fragmentContainerId: Int): Fragment? = fragmentManager.findFragmentById(fragmentContainerId)
 }
